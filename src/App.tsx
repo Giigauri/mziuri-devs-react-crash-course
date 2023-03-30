@@ -1,49 +1,69 @@
-import { Product } from './components/product/Product';
-import { useProducts } from './components/product/hooks/use-products.hook';
-import { ContentLoading } from './common/ContentLoading/ContentLoading';
-import { ErrorMessage } from './common/ErrorMesssage/ErrorMessage';
-import { EmptyContent } from './common/EmptyContent/EmptyContent';
-import { Modal } from './common/Modal/Modal';
-import { CreateProductForm } from './components/product/CreateProductForm';
-import { useContext } from 'react';
-import { IProduct } from './components/product/interfaces/product.interface';
-import { ModalContext } from './common/Modal/ModalContext';
+import { Fragment } from 'react';
+import { Routes, Route, NavLink } from 'react-router-dom';
+import { NotFoundPage } from './pages/NotFound';
+import { ProductsPage } from './pages/Products';
+import { TodoPage } from './pages/Todo';
+import { TodosPage } from './pages/Todos';
 
 const App: React.FC = () => {
-	const { products, error, isEmpty, loading, addProduct } = useProducts();
-	const { modalVisible, open, close } = useContext(ModalContext);
-
-	const createProduct = (product: IProduct) => {
-		addProduct(product);
-
-		close();
-	};
-
 	return (
-		<div className="container mx-auto max-w-2xl pt-5">
-			{loading && <ContentLoading />}
+		<Fragment>
+			<nav>
+				<ul>
+					<li>
+						<NavLink to={'/'} className={({ isActive }) => (isActive ? 'activeNavItem' : 'disableNavItem')}>
+							Home
+						</NavLink>
+					</li>
 
-			{error && <ErrorMessage error={error} />}
+					<li>
+						<NavLink
+							to={'/products'}
+							className={({ isActive }) => (isActive ? 'activeNavItem' : 'disableNavItem')}
+						>
+							Products
+						</NavLink>
+					</li>
 
-			{products.length
-				? products.map((products_item) => <Product key={products_item.id} product={products_item} />)
-				: null}
+					<li>
+						<NavLink
+							to={'/todos'}
+							className={({ isActive }) => (isActive ? 'activeNavItem' : 'disableNavItem')}
+						>
+							Todos
+						</NavLink>
+					</li>
 
-			{isEmpty && <EmptyContent title={'Products not found'} />}
+					<li>
+						<NavLink
+							to={'/todos/1'}
+							className={({ isActive }) => (isActive ? 'activeNavItem' : 'disableNavItem')}
+						>
+							Todo 1
+						</NavLink>
+					</li>
 
-			{modalVisible && (
-				<Modal title={'Create Product'}>
-					<CreateProductForm createProduct={createProduct} productsLength={products.length} />
-				</Modal>
-			)}
+					<li>
+						<NavLink
+							to={'/todos/new'}
+							className={({ isActive }) => (isActive ? 'activeNavItem' : 'disableNavItem')}
+						>
+							New Todo
+						</NavLink>
+					</li>
+				</ul>
+			</nav>
 
-			<button
-				className="fixed bottom-5 right-5 rounded-full bg-red-700 text-white text-2xl px-4 py-2"
-				onClick={open}
-			>
-				+
-			</button>
-		</div>
+			<Routes>
+				<Route path="/" element={<></>} />
+				<Route path="/products" element={<ProductsPage />} />
+				<Route path="/todos" element={<TodosPage />} />
+				<Route path="/todos/:id" element={<TodoPage />} />
+				<Route path="/todos/new" element={<></>} />
+
+				<Route path="*" element={<NotFoundPage />} />
+			</Routes>
+		</Fragment>
 	);
 };
 
