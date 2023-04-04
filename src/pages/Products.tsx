@@ -1,13 +1,13 @@
 import { Product } from '../components/product/Product';
 import { useProducts } from '../components/product/hooks/use-products.hook';
-import { ContentLoading } from '../common/ContentLoading/ContentLoading';
-import { ErrorMessage } from '../common/ErrorMesssage/ErrorMessage';
-import { EmptyContent } from '../common/EmptyContent/EmptyContent';
-import { Modal } from '../common/Modal/Modal';
+import { ContentLoading } from '../common/components/ContentLoading/ContentLoading';
+import { ErrorMessage } from '../common/components/ErrorMesssage/ErrorMessage';
+import { EmptyContent } from '../common/components/EmptyContent/EmptyContent';
+import { Modal } from '../common/components/Modal/Modal';
 import { CreateProductForm } from '../components/product/CreateProductForm';
 import { useContext } from 'react';
 import { IProduct } from '../components/product/interfaces/product.interface';
-import { ModalContext } from '../common/Modal/ModalContext';
+import { ModalContext } from '../common/components/Modal/ModalContext';
 
 export const ProductsPage = () => {
 	const { products, error, isEmpty, loading, addProduct } = useProducts();

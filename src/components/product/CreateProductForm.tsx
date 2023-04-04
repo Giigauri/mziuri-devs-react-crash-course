@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ErrorMessage } from '../../common/ErrorMesssage/ErrorMessage';
+import { ErrorMessage } from '../../common/components/ErrorMesssage/ErrorMessage';
 import { IProduct } from './interfaces/product.interface';
 
 type CreateProductFormProps = {

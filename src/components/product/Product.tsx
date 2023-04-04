@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { IProduct } from './interfaces/product.interface';
 
-type PropsProps = {
+type ProductProps = {
 	product: IProduct;
 };
 
-export const Product: React.FC<PropsProps> = ({ product }) => {
+export const Product: React.FC<ProductProps> = ({ product }) => {
 	const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
 
 	return (
