@@ -1,5 +1,4 @@
 import { Product } from '../components/product/Product';
-import { useProducts } from '../components/product/hooks/use-products.hook';
 import { ContentLoading } from '../common/components/ContentLoading/ContentLoading';
 import { ErrorMessage } from '../common/components/ErrorMesssage/ErrorMessage';
 import { EmptyContent } from '../common/components/EmptyContent/EmptyContent';
@@ -8,13 +7,14 @@ import { CreateProductForm } from '../components/product/CreateProductForm';
 import { useContext } from 'react';
 import { IProduct } from '../components/product/interfaces/product.interface';
 import { ModalContext } from '../common/components/Modal/ModalContext';
+import { useFetchData } from '../common/hooks/useFetchData.hook';
 
-export const ProductsPage = () => {
-	const { products, error, isEmpty, loading, addProduct } = useProducts();
+export const ProductsPage: React.FC = () => {
+	const { data, error, isEmpty, loading, addItem } = useFetchData<IProduct>('https://fakestoreapi.com/products');
 	const { modalVisible, open, close } = useContext(ModalContext);
 
 	const createProduct = (product: IProduct) => {
-		addProduct(product);
+		addItem(product);
 
 		close();
 	};
@@ -25,15 +25,13 @@ export const ProductsPage = () => {
 
 			{error && <ErrorMessage error={error} />}
 
-			{products.length
-				? products.map((products_item) => <Product key={products_item.id} product={products_item} />)
-				: null}
+			{data.length ? data.map((product) => <Product key={product.id} product={product} />) : null}
 
 			{isEmpty && <EmptyContent title={'Products not found'} />}
 
 			{modalVisible && (
 				<Modal title={'Create Product'}>
-					<CreateProductForm createProduct={createProduct} productsLength={products.length} />
+					<CreateProductForm createProduct={createProduct} productsLength={data.length} />
 				</Modal>
 			)}
 
