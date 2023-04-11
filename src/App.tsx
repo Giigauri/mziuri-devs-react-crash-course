@@ -2,8 +2,8 @@ import { Fragment } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { NotFoundPage } from './pages/NotFound';
 import { ProductsPage } from './pages/Products';
-import { TodoPage } from './pages/Todo';
-import { TodosPage } from './pages/Todos';
+import { UsersPage } from './pages/Users';
+import { UserPage } from './pages/User';
 
 const App: React.FC = () => {
 	return (
@@ -27,28 +27,10 @@ const App: React.FC = () => {
 
 					<li>
 						<NavLink
-							to={'/todos'}
+							to={'/users'}
 							className={({ isActive }) => (isActive ? 'activeNavItem' : 'disableNavItem')}
 						>
-							Todos
-						</NavLink>
-					</li>
-
-					<li>
-						<NavLink
-							to={'/todos/1'}
-							className={({ isActive }) => (isActive ? 'activeNavItem' : 'disableNavItem')}
-						>
-							Todo 1
-						</NavLink>
-					</li>
-
-					<li>
-						<NavLink
-							to={'/todos/new'}
-							className={({ isActive }) => (isActive ? 'activeNavItem' : 'disableNavItem')}
-						>
-							New Todo
+							Users
 						</NavLink>
 					</li>
 				</ul>
@@ -57,10 +39,8 @@ const App: React.FC = () => {
 			<Routes>
 				<Route path="/" element={<></>} />
 				<Route path="/products" element={<ProductsPage />} />
-				<Route path="/todos" element={<TodosPage />} />
-				<Route path="/todos/:id" element={<TodoPage />} />
-				<Route path="/todos/new" element={<></>} />
-
+				<Route path="/users" element={<UsersPage />} />
+				<Route path="/users/:id" element={<UserPage />} />
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 		</Fragment>
