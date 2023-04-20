@@ -3,7 +3,7 @@ import { registration } from './thunks/registration.thunk';
 import { login } from './thunks/login.thunk';
 import { getMe } from '../user/thunks/get-me.thunk';
 
-interface IAuthInitialState {
+export interface IAuthInitialState {
 	isAuthenticated: boolean;
 	accessToken: string;
 	loadingForLogin: boolean;
