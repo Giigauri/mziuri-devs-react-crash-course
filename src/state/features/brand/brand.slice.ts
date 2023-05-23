@@ -72,7 +72,7 @@ export const brandSlice = createSlice({
 
 		builder.addCase(deleteBrand.fulfilled, (state, action) => {
 			if (action.payload) {
-				state.brands.filter((brand) => String(brand._id) !== String(action.meta.arg));
+				state.brands = state.brands.filter((brand) => String(brand._id) !== String(action.meta.arg));
 			}
 
 			state.deleteBrandLoadingProcess = {
@@ -95,4 +95,4 @@ export const brandSlice = createSlice({
 	},
 });
 
-export const userReducer = brandSlice.reducer;
+export const brandReducer = brandSlice.reducer;
